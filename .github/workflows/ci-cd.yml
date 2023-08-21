@@ -34,6 +34,18 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish
+    - name: Upload the Publish artifact
+      uses: actions/upload-artifact@v3.0.0
+      with: 
+        name: publish_artifact
+        path: ${{ runner.temp }}/publish
+        retention-days: 30
+    - name: Upload a Templates Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: templates_artifact
+        path: ./templates/* 
+        retention-days: 30
 
   RG-Job:
     runs-on: ubuntu-latest
